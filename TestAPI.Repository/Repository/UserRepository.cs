@@ -1,8 +1,8 @@
 ﻿using TestAPI.Model;
 
-namespace TestAPI.Repository
+namespace TestAPI.Repository.Repository
 {
-    public class UserRepository: IUserRepository
+    public class UserRepository : IUserRepository
     {
         public UserRepository()
         {

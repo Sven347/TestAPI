@@ -2,11 +2,26 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
+using TestAPI.Repository.Repository;
+using TestAPI.Repository;
+using TestAPI.Service;
+using Microsoft.EntityFrameworkCore;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.AddDbContext<DBContext>(options =>
+    options.UseInMemoryDatabase("NotificationDb"));
+
+// Register repositories
+builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
+builder.Services.AddScoped<INotificationTypeRepository, NotificationTypeRepository>();
+
+// Register services
+builder.Services.AddScoped<INotificationService, NotificationService>();
+builder.Services.AddScoped<INotificationTypeService, NotificationTypeService>();
+
+
 
 builder.Services.AddControllers();
 
